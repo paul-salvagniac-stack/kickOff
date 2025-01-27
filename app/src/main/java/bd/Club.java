@@ -120,32 +120,30 @@ public class Club implements Parcelable {
             for (Map.Entry<String , String> m : critere.entrySet()) {
 
 
-                if (m.getKey() ==  "age") {
+                if (m.getKey().equals("age")) {
                     if (j.getAge() == Integer.parseInt(m.getValue()))
                         nbC++;
                 }
 
-                if (m.getKey() ==  "niveaux") {
+                if (m.getKey().equals("niveaux")) {
                     if (j.getNiveaux().equals(m.getValue()))
                         nbC++;
                 }
 
-                if (m.getKey() ==  "experience") {
+                if (m.getKey().equals("experience")) {
                     if (j.getExperience() == Integer.parseInt(m.getValue()))
                         nbC++;
                 }
 
-                if (m.getKey() ==  "poste") {
+                if (m.getKey().equals("poste")) {
                     if (j.getPoste().equals(m.getValue()))
                         nbC++;
                 }
 
-                if (m.getKey() ==  "pieds fort") {
+                if (m.getKey().equals("pieds fort")) {
                     if (j.getPiedsFort().equals(m.getValue()))
                         nbC++;
                 }
-
-
             }
             nbCritere.add(nbC);
         }
@@ -157,24 +155,27 @@ public class Club implements Parcelable {
 
         ArrayList<Integer> triId = new ArrayList();
         ArrayList<Integer> triCr = new ArrayList();
-        int j = 0;
-        int i = 1;
-        triId.add(id.get(j));
-        triCr.add(nbCritere.get(j));
 
-        while (i != nbCritere.size()) {
-            if (triCr.get(0)<nbCritere.get(i)) {
-                triId.add(0, id.get(i));
-                triCr.add(0, nbCritere.get(i));
+        int i = 0;
+        int matchCri = 0;
+        int k = 0;
+
+        while (k != nbCritere.size()){
+            while (i != nbCritere.size()) {
+                if (matchCri==nbCritere.get(i)) {
+                    triId.add( id.get(i));
+                    triCr.add( nbCritere.get(i));
+                }
+                i++;
             }
-            else
-                triId.add(id.get(i));
-            j++;
-            i++;
+            i=0;
+            matchCri++;
+            k++;
         }
         Collections.sort(nbCritere);
         Collections.reverse(nbCritere);
 
+        Collections.reverse(triId);
         return triId;
     }
 
